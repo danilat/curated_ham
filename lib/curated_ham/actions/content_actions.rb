@@ -7,7 +7,7 @@ module CuratedHam
     def run(params)
       params[:created_at] = DateTime.now
       content = Content.new(params)
-      @content_repository.store(content)
+      @content_repository.put(content)
       content
     end
   end

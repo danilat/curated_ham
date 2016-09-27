@@ -11,7 +11,7 @@ describe "Create A Content" do
   it "saves the content" do
     @action.run(valid_params)
 
-    expect(@content_repository).to have_received(:store).with(have_attributes(valid_params))
+    expect(@content_repository).to have_received(:put).with(have_attributes(valid_params))
   end
 
   it "sets creation date" do
