@@ -38,6 +38,9 @@ end
 
 class API
   def post(content_params)
+    content_repository = CuratedHam::ContentRepository.new
+    action = CuratedHam::CreateAContent.new(content_repository)
+    action.run(content_params)
   end
 
   def get
