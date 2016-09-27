@@ -23,7 +23,7 @@ describe "Get contents", :feature do
 
     it "items has the right format" do
       result = @my_json_api.get
-      json_result = JSON.parse(result)
+      json_result = JSON.parse(result, symbolize_names: true)
       item = json_result.first
 
       expect(item[:title]).to eq the_coding_stones[:title]
@@ -37,12 +37,32 @@ describe "Get contents", :feature do
 end
 
 class API
+  def initialize
+    @content_repository = CuratedHam::ContentRepository.new
+  end
+
   def post(content_params)
-    content_repository = CuratedHam::ContentRepository.new
-    action = CuratedHam::CreateAContent.new(content_repository)
+    action = CuratedHam::CreateAContent.new(@content_repository)
     action.run(content_params)
   end
 
   def get
+    action = CuratedHam::GetAllContents.new(@content_repository)
+    contents = action.run
+    content_json_serializer(contents)
   end
+
+  private 
+    def content_json_serializer(contents)
+      contents_hash = contents.collect do |content| 
+        {
+          title: content.title,
+          url: content.url,
+          description: content.description,
+          category: content.category,
+          created_at: content.category
+        }
+      end
+      JSON.dump(contents_hash)
+    end
 end
