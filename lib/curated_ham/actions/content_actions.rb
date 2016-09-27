@@ -11,4 +11,14 @@ module CuratedHam
       content
     end
   end
+
+  class GetAllContents
+    def initialize(content_repository)
+      @content_repository = content_repository
+    end
+
+    def run
+      @content_repository.find_all
+    end
+  end
 end
