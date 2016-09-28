@@ -7,7 +7,7 @@ describe "Get contents", :feature do
 
   context "in JSON format" do
     let(:the_coding_stones) do
-      {title: "coding stones", url: "http://codingstones.com/", description: "RocknRollas!!", category: "rockanroll"}
+      {title: "coding stones", url: "http://codingstones.com/", category: "rockanroll"}
     end
 
     before(:each) do
@@ -28,9 +28,9 @@ describe "Get contents", :feature do
 
       expect(item[:title]).to eq the_coding_stones[:title]
       expect(item[:url]).to eq the_coding_stones[:url]
-      expect(item[:description]).to eq the_coding_stones[:description]
       expect(item[:category]).to eq the_coding_stones[:category]
       expect(item[:created_at]).not_to be_nil
+      expect(item[:description]).not_to be_nil
     end
   end
 
@@ -39,10 +39,12 @@ end
 class API
   def initialize
     @content_repository = CuratedHam::ContentRepository.new
+    @metadata_parser = CuratedHam::MetadataParser.new
+    @content_service = CuratedHam::ContentService.new(@content_repository, @metadata_parser)
   end
 
   def post(content_params)
-    action = CuratedHam::CreateAContent.new(@content_repository)
+    action = CuratedHam::CreateAContent.new(@content_service)
     action.run(content_params)
   end
 
