@@ -1,1 +1,1 @@
-puts "yep!"
+Gem.find_files("curated_ham/**/*.rb").each { |path| require path }
