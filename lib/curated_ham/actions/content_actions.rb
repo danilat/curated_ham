@@ -4,11 +4,8 @@ module CuratedHam
       @content_repository = content_repository
     end
 
-    def run(params)
-      params[:created_at] = DateTime.now
-      content = Content.new(params)
-      @content_repository.put(content)
-      content
+    def run(args)
+      @content_repository.save_content(args)
     end
   end
 
