@@ -30,7 +30,6 @@ describe "Get contents", :feature do
       expect(item[:url]).to eq the_coding_stones[:url]
       expect(item[:category]).to eq the_coding_stones[:category]
       expect(item[:created_at]).not_to be_nil
-      expect(item[:description]).not_to be_nil
     end
   end
 
