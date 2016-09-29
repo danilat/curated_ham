@@ -37,15 +37,21 @@ end
 
 class API
   def initialize
-    
+    @repository = CuratedHam::LinkRepository.new
+    @service = CuratedHam::LinkService.new(@repository)
   end
 
   def post(content_params)
-    
+    action = CuratedHam::CreateALink.new(@service)
+    action.run(content_params)
   end
 
   def get
+    action = CuratedHam::GetAllLinks.new(@repository)
     
+    links = action.run
+
+    content_json_serializer(links)
   end
 
   private 
@@ -54,7 +60,6 @@ class API
         {
           title: content.title,
           url: content.url,
-          description: content.description,
           category: content.category,
           created_at: content.created_at
         }
