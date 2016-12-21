@@ -8,7 +8,7 @@ module CuratedHam
       @links
     end
 
-    def save_link(link)
+    def put(link)
       @links << link
     end
   end

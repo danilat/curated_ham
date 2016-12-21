@@ -15,7 +15,7 @@ describe "LinkService" do
   it "saves a new link" do
     @service.create_link(the_coding_stones)
 
-    expect(@repository).to have_received(:save_link).with(have_attributes(the_coding_stones))
+    expect(@repository).to have_received(:put).with(have_attributes(the_coding_stones))
   end
 
   it "generates the creation date" do

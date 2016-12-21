@@ -4,7 +4,7 @@ describe "Link Repository" do
     @repository = CuratedHam::LinkRepository.new
   end
   it "finds all" do
-    @repository.save_link(a_link)
+    @repository.put(a_link)
 
     links = @repository.find_all
 

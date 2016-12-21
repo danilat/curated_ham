@@ -9,7 +9,7 @@ module CuratedHam
       args[:created_at] = @clock.now
       
       link = Link.new(args)
-      @link_repository.save_link(link)
+      @link_repository.put(link)
       link
     end
   end
