@@ -4,11 +4,13 @@ describe "Get contents", :feature do
   end
 
   before(:each) do
-
+    link_repository = CuratedHam::LinkRepository.new
+    @retrieve_action = CuratedHam::RetrieveAllTheLinks.new(link_repository)
   end
 
   it "gets a collection" do
-    links = nil
+    links = @retrieve_action.run()
+    link = links.first
 
     expect(link).to have_attributes(the_coding_stones)
   end
