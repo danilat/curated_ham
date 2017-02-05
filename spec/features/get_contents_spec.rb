@@ -5,6 +5,11 @@ describe "Get contents", :feature do
 
   before(:each) do
     link_repository = CuratedHam::LinkRepository.new
+    clock = CuratedHam::Clock.new
+    service = CuratedHam::LinkService.new(link_repository, clock)
+    @create_action = CuratedHam::CreateALink.new(service)
+    @create_action.run(the_coding_stones)
+
     @retrieve_action = CuratedHam::RetrieveAllTheLinks.new(link_repository)
   end
 

@@ -8,4 +8,13 @@ module CuratedHam
       @link_repository.find_all
     end
   end
+
+  class CreateALink
+    def initialize(service)
+      @service = service
+    end
+    def run(args)
+      @service.create_link(args)
+    end
+  end
 end
