@@ -10,8 +10,9 @@ describe "Get contents", :feature do
 
   it "gets a collection" do
     links = @retrieve_action.run()
-    link = links.first
 
+    expect(links.size).to eq 1
+    link = links.first
     expect(link).to have_attributes(the_coding_stones)
   end
 end
