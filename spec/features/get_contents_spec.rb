@@ -6,6 +6,12 @@ describe "Get contents", :feature do
   before(:each) do
     link_repository = CuratedHam::LinkRepository.new
     @retrieve_action = CuratedHam::RetrieveAllTheLinks.new(link_repository)
+
+    clock = CuratedHam::Clock.new
+    link_service = CuratedHam::LinkService.new(link_repository, clock)
+    create_action = CuratedHam::CreateALink.new(link_service)
+
+    create_action.run(the_coding_stones)
   end
 
   it "gets a collection" do
